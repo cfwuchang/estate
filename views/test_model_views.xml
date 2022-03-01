@@ -1,0 +1,102 @@
+<!-- name = fields.Char(string='名称')
+    description = fields.Text(string='类型')
+    postcode = fields.Text(string='编码')
+    date_availability = fields.Date(string='截至日期')
+    expected_price = fields.Float(string='预期价格')
+    selling_price = fields.Float(string='卖价')
+    bedrooms = fields.Integer(string='房间数')
+    living_area = fields.Integer(string='房间面积')
+    facades = fields.Integer(string='墙壁数')
+    garage = fields.Boolean(string='车库')
+    garden = fields.Boolean(string='院子')
+    garden_area = fields.Integer(string='绿化区')
+    garden_orientation = fields.Selection([('North','北'),
+    ("South","南"),("East","东"),("West","西")],string='面向花园') -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <fecord id='test_model_tree_view' model='ir.ui.view'>
+        <field name='name'>
+            房地产广告
+        </field>
+        <field name='model'>
+            test.model
+        </field>
+        <field name='arch' type='xml'>
+            <tree>
+            <field name='name' string='名称'></field>
+            <field name='postcode' string='编码'></field>
+            <field name='expected_price' string='预期价格'></field>
+            <field name='selling_price' string='卖价'></field>
+            <field name='bedrooms' string='房间数'></field>
+            <field name='living_area' string='房间面积'></field>
+            <field name='date_availability' string='截至日期'></field>
+            </tree>
+        </field>
+    </fecord>
+
+    <fecord id='test_model_form_view' model='ir.ui.view'>
+        <field name='name'>
+            房地产广告
+        </field>
+        <field name='model'>
+            test.model
+        </field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheer>
+                   <h1><field name='name'/></h1>
+                   <group>
+                        <group>
+                            <field name='postcode' string='编码'/>
+                            <field name='date_availability' string='截至日期'/>
+                        </group> 
+                        <group>
+                            <field name='expected_price' string='预期价格'/>
+                            <field name='selling_price' string='卖价'/>
+                        </group>
+                   </group>
+                   <notebook>
+                    <page string='详情'>
+                        <group>
+                            <field name='description'/>
+                            <field name='bedrooms'/>
+                            <field name='living_area'/>
+                            <field name='facades'/>
+                            <field name='garage'/>
+                            <field name='garden_area'/>
+                            <field name='garden_orientation'/>
+                        </group>
+                    </page>
+                   </notebook>
+                </sheer>
+            </form>
+        </field>
+    </fecord>
+
+    <fecord id='test_model_search_view' model='ir.ui.view'>
+        <field name='name'>
+            房地产广告
+        </field>
+        <field name='model'>
+            test.model
+        </field>
+        <field name='arch' type='xml'>
+            <search>
+                <field name='name' string='名称'/>
+                <field name='postcode' string='编码'/>
+            </search>
+        </field>
+    </fecord>
+
+    <record id="test_model_act_window" model="ir.actions.act_window">
+        <field name="name">房地产广告</field>
+        <field name="res_model">test.model</field>
+        <field name="view_mode">tree,form</field>
+
+        <filter name='bedrooms' domian='[('bedrooms','>','3')]'></filter>
+    </record>
+
+    <menuitem id="test_model_menu_action" action="test_model_act_window"/>
+
+</odoo>
